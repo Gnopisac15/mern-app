@@ -25,14 +25,14 @@ router.route('/add').post((req,res) =>{
 });
 
 //delete student
-router.route('delete/:id').delete((req, res) => {
+router.route('/delete/:id').delete((req, res) => {
     Student.findByIdAndDelete(req.params.id)
         .then(student => res.json('Record was deleted.'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
 //update
-
+  
 router.route('/update/:id').post((req, res) => {
     Student.findById(req.params.id)
         .then(student => {
@@ -45,6 +45,11 @@ router.route('/update/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
+// details
+router.route('/details/:id').get((req, res) => {
+    Student.findById(req.params.id)
+        .then(student => res.json(student))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
